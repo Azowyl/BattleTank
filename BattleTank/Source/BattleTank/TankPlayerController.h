@@ -7,6 +7,8 @@
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h"
 
+#define OUT
+
 /**
  * 
  */
@@ -21,7 +23,20 @@ public:
 	void BeginPlay() override;
 
 private:
+	UPROPERTY(EditAnywhere)
+	float CrossHairXLocation = .5f;
+
+	UPROPERTY(EditAnywhere)
+	float CrossHairYLocation = .33333f;
+
+	/* Methods */
+
 	void Tick(float DeltaTime) override;
 
 	void AimTowardsCrosshair();
+
+	// return true if hits landscape
+	bool GetSightRayHitLocation(OUT FVector& HitLocation) const;
+
+	bool GetLookDirection(FVector2D &ScreenLocation, FVector LookDirection) const;
 };
