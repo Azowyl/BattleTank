@@ -34,5 +34,5 @@ public:
 	void SetBarrelComponent(UTankBarrel* BarrelToSet);
 
 	UPROPERTY(EditAnywhere, Category = Firing)
-	float LaunchSpeed = 10000; // launching at 100 m/s
+	float LaunchSpeed = 4000;
 };
