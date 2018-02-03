@@ -3,12 +3,6 @@
 #include "TankAIController.h"
 #include "../Public/TankAIController.h"
 
-ATank* ATankAIController::GetControlledTank() const
-{
-	return Cast<ATank>(GetPawn());
-}
-
-
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
@@ -34,6 +28,20 @@ void ATankAIController::BeginPlay()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("AI Couldn't find PlayerTank"));
 	}
+}
+
+void ATankAIController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+
+	if (!GetControlledTank()) { return; }
+
+	GetControlledTank()->AimAt(GetPlayerTank()->GetTargetLocation());
+}
+
+ATank* ATankAIController::GetControlledTank() const
+{
+	return Cast<ATank>(GetPawn());
 }
 
 ATank * ATankAIController::GetPlayerTank() const
