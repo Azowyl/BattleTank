@@ -28,11 +28,16 @@ void ATank::BeginPlay()
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 }
 
 void ATank::SetBarrelComponent(UTankBarrel * BarrelToSet)
 {
 	AimingComponent->SetBarrelComponent(BarrelToSet);
 }
+
+void ATank::SetTurretComponent(UTankTorret * TurretToSet)
+{
+	AimingComponent->SetTorretComponent(TurretToSet);
+}
+
 
