@@ -9,6 +9,7 @@
 
 class UTankBarrel;
 class UTankTorret;
+class AProjectile;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -42,4 +43,10 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void Fire();
+
+private:
+	UPROPERTY(EditAnywhere, Category = Setup)
+	TSubclassOf<AProjectile> ProjectileBlueprint;
+
+	UTankBarrel* Barrel = nullptr;
 };
