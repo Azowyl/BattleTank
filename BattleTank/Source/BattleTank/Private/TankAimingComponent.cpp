@@ -17,6 +17,14 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
+void UTankAimingComponent::Initialise(UTankBarrel * Barrel, UTankTorret * Torret)
+{
+	if (!Barrel || !Torret) { return; }
+
+	this->Barrel = Barrel;
+	this->Torret = Torret;
+}
+
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
 	if (!Barrel) { return; }
@@ -34,16 +42,6 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
 		MoveBarrelTowards(AimDirection);
 	}
-}
-
-void UTankAimingComponent::SetBarrelComponent(UTankBarrel * BarrelToSet)
-{
-	Barrel = BarrelToSet;
-}
-
-void UTankAimingComponent::SetTorretComponent(UTankTorret * TurretToSet)
-{
-	Torret = TurretToSet;
 }
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)

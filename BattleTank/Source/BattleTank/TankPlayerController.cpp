@@ -13,17 +13,6 @@ ATank* ATankPlayerController::GetControlledTank() const
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-
-	auto ControlledTank = GetControlledTank();
-
-	if (ControlledTank)
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Player Controller Possessing: %s"), *ControlledTank->GetName());
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("Player Controller NOT Possessing Anything"));
-	}
 }
 
 void ATankPlayerController::Tick(float DeltaTime)

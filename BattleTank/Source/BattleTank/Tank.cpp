@@ -3,14 +3,13 @@
 #include "Tank.h"
 #include "TankBarrel.h"
 #include "Projectile.h"
+#include "TankMovementComponent.h"
 
 // Sets default values
 ATank::ATank()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
-
-	AimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
 }
 
 void ATank::AimAt(FVector HitLocation)
@@ -31,15 +30,14 @@ void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 }
 
-void ATank::SetBarrelComponent(UTankBarrel * BarrelToSet)
+void ATank::SetBarrelComponent(UTankBarrel * Barrel)
 {
-	AimingComponent->SetBarrelComponent(BarrelToSet);
-	Barrel = BarrelToSet;
+	this->Barrel = Barrel;
 }
 
-void ATank::SetTurretComponent(UTankTorret * TurretToSet)
+void ATank::SetAimingComponent(UTankAimingComponent * AimingComponent)
 {
-	AimingComponent->SetTorretComponent(TurretToSet);
+	this->AimingComponent = AimingComponent;
 }
 
 void ATank::Fire()
@@ -51,6 +49,7 @@ void ATank::Fire()
 		auto Rotation = Barrel->GetSocketRotation(FName("Projectile"));
 
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Location, Rotation);
+		if (!Projectile) { return; }
 		Projectile->LaunchProjectile(LaunchSpeed);
 		LastTimeShot = GetWorld()->GetTimeSeconds();
 	}
