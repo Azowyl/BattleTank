@@ -22,4 +22,7 @@ private:
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
+
+	UPROPERTY(EditDefaultsonly, Category = Setup)
+	float AcceptanceRadius = 100;
 };
