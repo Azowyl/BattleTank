@@ -21,18 +21,13 @@ void ATank::AimAt(FVector HitLocation)
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	Barrel = FindComponentByClass<UTankBarrel>();
 }
 
 // Called to bind functionality to input
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-}
-
-void ATank::SetBarrelComponent(UTankBarrel * Barrel)
-{
-	this->Barrel = Barrel;
 }
 
 void ATank::SetAimingComponent(UTankAimingComponent * AimingComponent)
