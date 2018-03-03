@@ -27,6 +27,12 @@ public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
 
+	// Called every frame
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	UFUNCTION(BlueprintCallable)
+	void Fire();
+
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void Initialise(UTankBarrel* Barrel, UTankTorret* Torret);
 
@@ -44,13 +50,6 @@ protected:
 	UPROPERTY(EditAnywhere, Category = Setup)
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
-public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
-	UFUNCTION(BlueprintCallable)
-	void Fire();
-
 private:
 	UTankBarrel * Barrel = nullptr;
 	UTankTorret * Torret = nullptr;
@@ -62,4 +61,8 @@ private:
 	float ReloadTime = 3;
 
 	float LastTimeShot;
+
+	FVector LastBarrelPosition;
+
+	bool IsBarrelMoving() const;
 };
