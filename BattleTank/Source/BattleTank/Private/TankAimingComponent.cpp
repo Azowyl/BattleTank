@@ -19,15 +19,15 @@ UTankAimingComponent::UTankAimingComponent()
 
 void UTankAimingComponent::Initialise(UTankBarrel * Barrel, UTankTorret * Torret)
 {
-	if (!Barrel || !Torret) { return; }
+	if (!ensure(Barrel) || !ensure(Torret)) { return; }
 
 	this->Barrel = Barrel;
 	this->Torret = Torret;
 }
 
-void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
+void UTankAimingComponent::AimAt(FVector HitLocation)
 {
-	if (!Barrel) { return; }
+	if (!ensure(Barrel)) { return; }
 
 	FVector OutLaunchVelocity;
 	auto StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
@@ -74,3 +74,17 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 
 }
 
+void UTankAimingComponent::Fire()
+{
+	bool IsReloaded = (GetWorld()->GetTimeSeconds() - LastTimeShot) > ReloadTime;
+
+	if (Barrel && IsReloaded) {
+		auto Location = Barrel->GetSocketLocation(FName("Projectile"));
+		auto Rotation = Barrel->GetSocketRotation(FName("Projectile"));
+
+		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Location, Rotation);
+		if (!ensure(Projectile)) { return; }
+		Projectile->LaunchProjectile(LaunchSpeed);
+		LastTimeShot = GetWorld()->GetTimeSeconds();
+	}
+}

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Projectile.h"
 #include "TankAimingComponent.generated.h"
 
 UENUM()
@@ -29,7 +30,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void Initialise(UTankBarrel* Barrel, UTankTorret* Torret);
 
-	void AimAt(FVector HitLocation, float LaunchSpeed);
+	void AimAt(FVector HitLocation);
 
 	void MoveBarrelTowards(FVector AimDirection);
 
@@ -40,11 +41,25 @@ protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 	EFiringStatus FiringStatus = EFiringStatus::Reloading;
 
+	UPROPERTY(EditAnywhere, Category = Setup)
+	TSubclassOf<AProjectile> ProjectileBlueprint;
+
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	UFUNCTION(BlueprintCallable)
+	void Fire();
+
 private:
 	UTankBarrel * Barrel = nullptr;
 	UTankTorret * Torret = nullptr;
+
+	UPROPERTY(EditDefaultsonly)
+	float LaunchSpeed = 4000;
+
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
+	float ReloadTime = 3;
+
+	float LastTimeShot;
 };

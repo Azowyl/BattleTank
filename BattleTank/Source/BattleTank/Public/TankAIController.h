@@ -2,9 +2,9 @@
 
 #pragma once
 
-#include "../Tank.h"
 #include "CoreMinimal.h"
 #include "AIController.h"
+#include "TankAimingComponent.h"
 #include "TankAIController.generated.h"
 
 /**
@@ -25,4 +25,6 @@ private:
 
 	UPROPERTY(EditDefaultsonly, Category = Setup)
 	float AcceptanceRadius = 100;
+
+	UTankAimingComponent* AimingComponent = nullptr;
 };

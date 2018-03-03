@@ -4,7 +4,7 @@
 
 void UTankMovementComponent::Initialise(UTankTrack* LeftTrack, UTankTrack* RightTrack)
 {
-	if (!LeftTrack || !RightTrack) { return; }
+	if (!ensure(LeftTrack) || !ensure(RightTrack)) { return; }
 	this->LeftTrack = LeftTrack;
 	this->RightTrack = RightTrack;
 }

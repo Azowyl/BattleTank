@@ -2,9 +2,9 @@
 
 #pragma once
 
-#include "Tank.h"
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
+#include "TankAimingComponent.h"
 #include "TankPlayerController.generated.h"
 
 #define OUT
@@ -18,23 +18,23 @@ class BATTLETANK_API ATankPlayerController : public APlayerController
 	GENERATED_BODY()
 	
 public:
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	ATank * GetControlledTank() const;
-	
 	void BeginPlay() override;
 
 protected:
 	UFUNCTION(BlueprintImplementableEvent)
 	void FoundAimingComponent(UTankAimingComponent* AimingComponent);
 
+	UPROPERTY(BlueprintReadOnly)
+	UTankAimingComponent* AimingComponent = nullptr;
+
 private:
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsonly)
 	float CrossHairXLocation = .5f;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsonly)
 	float CrossHairYLocation = .33333f;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsonly)
 	float LineTraceRange = 1000000; // 10 km.
 
 	/* Methods */
