@@ -93,7 +93,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	auto TurretRotator = Torret->GetForwardVector().Rotation();
 	auto TurretDeltaRotator = AimAsRotator - TurretRotator;
 
-	if (TurretDeltaRotator.Yaw > 180.0)
+	if (FMath::Abs(TurretDeltaRotator.Yaw) > 180.0)
 	{
 		TurretDeltaRotator = -1 * TurretDeltaRotator;
 	}
@@ -118,6 +118,6 @@ void UTankAimingComponent::Fire()
 		if (!ensure(Projectile)) { return; }
 		Projectile->LaunchProjectile(LaunchSpeed);
 		LastTimeShot = GetWorld()->GetTimeSeconds();
-		CurrentAmmo -= 1;
+		CurrentAmmo--;
 	}
 }
