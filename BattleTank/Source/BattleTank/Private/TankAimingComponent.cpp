@@ -88,6 +88,12 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 
 	auto TurretRotator = Torret->GetForwardVector().Rotation();
 	auto TurretDeltaRotator = AimAsRotator - TurretRotator;
+
+	if (TurretDeltaRotator.Yaw > 180.0)
+	{
+		TurretDeltaRotator = -1 * TurretDeltaRotator;
+	}
+
 	Torret->Rotate(TurretDeltaRotator.Yaw);
 }
 

@@ -24,11 +24,14 @@ private:
 	UPROPERTY(EditDefaultsOnly)
 	float MaxThrottleForce = 40000000;
 
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	float CurrentThrottle = 0;
 
 	virtual void BeginPlay() override;
 
 	UFUNCTION()
 	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+
+	void AddSidewaysForce();
+
+	void DriveTrack();
 };
