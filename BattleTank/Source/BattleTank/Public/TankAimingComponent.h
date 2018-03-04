@@ -13,6 +13,7 @@ enum class EFiringStatus : uint8
 	Aiming,
 	Reloading,
 	Locked,
+	Out, // of ammo
 };
 
 class UTankBarrel;
@@ -51,6 +52,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = Setup)
 	TSubclassOf<AProjectile> ProjectileBlueprint;
+
+	UPROPERTY(BlueprintReadOnly, Category = "State")
+	int CurrentAmmo = 3;
 
 private:
 	UTankBarrel * Barrel = nullptr;
