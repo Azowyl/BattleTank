@@ -24,7 +24,7 @@ private:
 	virtual void Tick(float DeltaTime) override;
 
 	UPROPERTY(EditDefaultsonly, Category = Setup)
-	float AcceptanceRadius = 100;
+	float AcceptanceRadius = 7000;
 
 	UTankAimingComponent* AimingComponent = nullptr;
 };

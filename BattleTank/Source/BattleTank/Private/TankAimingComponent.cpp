@@ -97,6 +97,11 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	Torret->Rotate(TurretDeltaRotator.Yaw);
 }
 
+EFiringStatus UTankAimingComponent::GetFiringStatus() const
+{
+	return FiringStatus;
+}
+
 void UTankAimingComponent::Fire()
 {
 	bool IsReloaded = FiringStatus != EFiringStatus::Reloading;
