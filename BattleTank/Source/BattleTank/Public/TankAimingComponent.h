@@ -43,6 +43,9 @@ public:
 
 	EFiringStatus GetFiringStatus() const;
 
+	UFUNCTION(BlueprintCallable)
+	int32 GetCurrentAmmo() const;
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -53,8 +56,8 @@ protected:
 	UPROPERTY(EditAnywhere, Category = Setup)
 	TSubclassOf<AProjectile> ProjectileBlueprint;
 
-	UPROPERTY(BlueprintReadOnly, Category = "State")
-	int CurrentAmmo = 3;
+	UPROPERTY(EditDefaultsonly, Category = "State")
+	int32 CurrentAmmo = 3;
 
 private:
 	UTankBarrel * Barrel = nullptr;

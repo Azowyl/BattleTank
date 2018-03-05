@@ -106,6 +106,11 @@ EFiringStatus UTankAimingComponent::GetFiringStatus() const
 	return FiringStatus;
 }
 
+int32 UTankAimingComponent::GetCurrentAmmo() const
+{
+	return CurrentAmmo;
+}
+
 void UTankAimingComponent::Fire()
 {
 	bool IsReloaded = FiringStatus != EFiringStatus::Reloading;
