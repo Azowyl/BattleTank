@@ -43,6 +43,9 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	URadialForceComponent* RadialForce;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	float Damage = 20;
+
 	UPROPERTY(EditDefaultsonly)
 	float DestroyDelay = 10.0;
 	
